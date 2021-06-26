@@ -55,13 +55,13 @@ function MapExample() {
     setLoading(true);
     fetch("/api/map_data")
       .then((response) => response.json())
-      .then(data => {
+      .then((data) => {
         setMapData(data);
         setLoading(false);
       });
   }, []);
 
-  React.useEffect(addMarkers, [mapData])
+  React.useEffect(addMarkers, [mapData]);
 
   function addMarkers() {
     const markers = [];
@@ -90,7 +90,7 @@ function MapExample() {
       });
 
       marker.addListener("click", () => {
-        infoWindow.open(basicMap, marker);
+        infoWindow.open(googleMapRef.current, marker);
       });
     }
   }
@@ -131,8 +131,8 @@ function MapExample() {
       id="map-div"
       style={{
         height: 800,
-        margin: `1em 0`,
-        borderRadius: `0.5em`,
+        margin: "1em 0",
+        borderRadius: "0.5em",
         width: 800,
       }}
       ref={mapElementRef}
