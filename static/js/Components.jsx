@@ -56,18 +56,16 @@ function MapExample() {
     fetch("/api/map_data")
       .then((response) => response.json())
       .then(data => {
-        console.log('D', data);
-        addMarkers(data);
         setMapData(data);
         setLoading(false);
       });
   }, []);
 
-  function addMarkers(data) {
+  React.useEffect(addMarkers, [mapData])
+
+  function addMarkers() {
     const markers = [];
-    console.log('mapData', data)
-    for (const location of data) {
-      console.log(location);
+    for (const location of mapData) {
       markers.push(
         new google.maps.Marker({
           position: location.coords,
